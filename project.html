@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        #total, #percentage {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <label for="tf1">SELECT SUBJECT</label>
+        <input type="text" list="tf1" id="subject"/><br><br>
+        <datalist id="tf1">
+            <option>CLOUD COMPUTING</option>
+            <option>COMPILER DESIGN</option>
+            <option>MACHINE LEARNING</option>
+            <option>MANAGEMENT SCIENCE</option>
+            <option>DEEP LEARNING</option>
+        </datalist>
+        <label for="marks">MARKS</label> 
+        <input type="number" id="marks" placeholder="MARKS"><br><br>
+        <input type="submit" onclick="disp()" >
+        <input type="button" value="display" onclick="disp1()">
+        <table border="1" height="120" width="120">
+                <th>SUBJECT</th>
+                <th>MARKS</th>
+            <tr>
+                <td id="s1">CLOUD COMPUTING </td>
+                <td id="m1"></td>
+            </tr>
+            <tr>
+                <td id="s2">COMPILER DESIGN</td>
+                <td id="m2"></td>
+            </tr>
+            <tr>
+                <td id="s3">MACHINE LEARNING</td>
+                <td id="m3"></td>
+            </tr>
+            <tr>
+                <td id="s4">MANAGEMENT SCIENCE</td>
+                <td id="m4"></td>
+            </tr>
+            <tr>
+                <td id="s5">DEEP LEARNING</td>
+                <td id="m5"></td>
+            </tr>
+        </table>
+        <div id="total"></div>
+        <div id="percentage"></div>
+    </div>
+    <script type="text/javascript">
+        const subjects=["CLOUD COMPUTING","COMPILER DESIGN","MACHINE LEARNING","MANAGEMENT SCIENCE","DEEP LEARNING"];
+        let totalMarks = 0;
+        let marksArray = [];
+        
+        function disp(){
+            let selSub = document.getElementById('subject').value;
+            let selMarks = document.getElementById('marks').value;
+            let index = subjects.indexOf(selSub);
+            if(index !== -1){
+                let marksCell = document.getElementById('m' + (index + 1));
+                marksCell.innerText = selMarks;
+                totalMarks += parseInt(selMarks);
+                marksArray[index] = selMarks;
+            }
+            document.getElementById('subject').value = '';
+            document.getElementById('marks').value = '';
+        }
+        
+        function disp1(){
+            let totalElement = document.getElementById('total');
+            let percentageElement = document.getElementById('percentage');
+            let totalMarksText = 'Total Marks: ' + totalMarks;
+            let percentage = (totalMarks / 500) * 100;
+            let percentageText = 'Percentage: ' + percentage.toFixed(2) + '%';
+            totalElement.innerText = totalMarksText;
+            percentageElement.innerText = percentageText;
+            marksArray=[];
+        }
+    </script>
+</body>
+</html>
